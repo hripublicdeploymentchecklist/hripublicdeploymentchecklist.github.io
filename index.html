@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRI Public Deployment Checklist</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="main-side-wrapper" style="display:flex;flex-direction:row;height:100vh;width:100vw;">
+    <div class="container" id="main-content" style="flex:1 1 auto;min-width:0;margin-right:420px;">
+      <h1 style="text-align: center; margin: 20px 0; font-size: 2.5em; color: #333; font-weight: bold;">HRI Public Deployment Checklist</h1>
+      <div class="grid">
+        <!-- Headers -->
+        <div style="position: sticky; top: 0; z-index: 10; background: white;"></div>
+        <div class="header-cell" style="position: sticky; top: 0; z-index: 10;">Robot (Technical and System)</div>
+        <div class="header-cell" style="position: sticky; top: 0; z-index: 10;">Human (Procedure, Researcher, Participant) </div>
+        <div class="header-cell" style="position: sticky; top: 0; z-index: 10;">Public (Site, Authorities, Law)</div>
+        
+        <!-- White padding below headers -->
+        <div style="background: white; height: 15px; grid-column: 1 / -1; position: sticky; top: 45px; z-index: 9;"></div>
+
+        <!-- Before Row -->
+        <div class="row-header">Before</div>
+        <div class="cell" id="before-robot"></div>
+        <div class="cell" id="before-human"></div>
+        <div class="cell" id="before-public"></div>
+
+        <!-- During Row -->
+        <div class="row-header">During</div>
+        <div class="cell" id="during-robot"></div>
+        <div class="cell" id="during-human"></div>
+        <div class="cell" id="during-public"></div>
+
+        <!-- After Row -->
+        <div class="row-header">After</div>
+        <div class="cell" id="after-robot"></div>
+        <div class="cell" id="after-human"></div>
+        <div class="cell" id="after-public"></div>
+      </div>
+    </div>
+    <div id="divider"
+      style="width:6px;cursor:col-resize;background:#eee;z-index:101;position:fixed;top:0;right:437px;height:100vh;">
+    </div>
+    <div id="side-panel"
+      style="flex-shrink:0;width:450px;min-width:220px;background:#fff;box-shadow:-8px 0 32px rgba(0,0,0,0.12);display:flex;flex-direction:column;align-items:center;overflow-y:auto;height:100vh;position:fixed;top:0;right:0;z-index:100;">
+      <div
+        style="width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;padding:40px 30px 30px 30px;">
+        <div class="card-title" id="side-panel-title" style="font-size:2em;margin-bottom:20px;"></div>
+        <div class="card-content" id="side-panel-content"
+          style="font-size:1.2em;white-space:pre-line;max-width:340px;max-height:70vh;overflow:auto;"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Load card data from external JSON file
+    let cardData = {};
+    async function loadCardDataAndInit() {
+      try {
+        const res = await fetch('card_20250929_1120_USA_ET.json');
+        cardData = await res.json();
+        // Initialize all cells with cards
+        Object.keys(cardData).forEach(cellId => {
+          const cell = document.getElementById(cellId);
+          const cardsHtml = cardData[cellId].map((data, index) => createCard(data, index)).join('');
+          cell.innerHTML = cardsHtml;
+        });
+      } catch (e) {
+        console.error('Failed to load cardData.json', e);
+      }
+    }
+    // Run on page load
+    window.addEventListener('DOMContentLoaded', loadCardDataAndInit);
+
+    // Create cards for each cell
+    function createCard(data, index) {
+    // List the first content and add ... if there are more
+    const shortContent = data.content.length > 1 ? data.content[0] + " <br>...<br>..." : data.content[0];
+    // Use a span for dynamic font resizing
+    return `
+        <div class="card" onclick="flipCard(this)">
+          <div class="card-inner" style="position:relative;width:100%;height:100%;">
+            <div class="card-front" style="display:flex;flex-direction:column;align-items:center;justify-content:center;position:absolute;top:0;left:0;width:100%;height:100%;">
+              <label class="card-checkbox-label" style="position:absolute;top:10px;left:10px;z-index:2;">
+                <input type="checkbox" class="card-checkbox" onclick="event.stopPropagation();">
+              </label>
+              <div class="card-title" style="width:100%;text-align:center;">${data.title}</div>
+              <div class="click-hint" style="position:absolute;bottom:10px;left:0;width:100%;display:flex;justify-content:center;pointer-events:none;">
+                <span class="chevron-down"></span>
+              </div>
+            </div>
+            <div class="card-back" style="display:flex;flex-direction:column;align-items:center;justify-content:center;position:absolute;top:0;left:0;width:100%;height:100%;">
+              <div class="card-content card-short-content" style="display:flex;align-items:center;justify-content:center;width:100%;overflow:hidden;text-overflow:ellipsis;">
+                <span class="short-content-text">${data.content}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Flip card function
+    function flipCard(card) {
+      card.classList.toggle('flipped');
+      // Always show content in side panel when card is flipped
+      if (card.classList.contains('flipped')) {
+        const cardBack = card.querySelector('.card-back');
+        const cardTitle = card.querySelector('.card-title').textContent;
+        let cardObj = null;
+        outer: for (const arr of Object.values(cardData)) {
+          for (const obj of arr) {
+            if (obj.title === cardTitle) { cardObj = obj; break outer; }
+          }
+        }
+        document.getElementById('side-panel-title').textContent = cardObj ? cardObj.title : cardTitle;
+        const sidePanelContent = document.getElementById('side-panel-content');
+        sidePanelContent.innerHTML = '<ul style="padding-left:1em;">' + cardObj.content.map(item => `<li>${item}</li>`).join('') + '</ul>';
+      }
+      else {
+        // Reset side panel content when card is flipped back
+        document.getElementById('side-panel-title').textContent = '';
+        document.getElementById('side-panel-content').innerHTML = '';
+      }
+    }
+
+    // Resize font to fit container (single line, ellipsis)
+    function fitText(span, container) {
+      let fontSize = 12;
+      span.style.fontSize = fontSize + 'px';
+      span.style.display = 'inline-block';
+      span.style.width = 'auto';
+      span.style.maxWidth = '100%';
+      while (span.scrollWidth > container.offsetWidth && fontSize > 10) {
+        fontSize -= 1;
+        span.style.fontSize = fontSize + 'px';
+      }
+    }
+
+    // Draggable divider logic
+    (function () {
+      const divider = document.getElementById('divider');
+      const sidePanel = document.getElementById('side-panel');
+      const mainContent = document.getElementById('main-content');
+      let isDragging = false;
+      let startX = 0;
+      let startWidth = 0;
+
+      function updateLayout(newWidth) {
+        // Update side panel width
+        sidePanel.style.width = newWidth + 'px';
+        // Update main content margin to match side panel width
+        mainContent.style.marginRight = (newWidth + 20) + 'px';
+        // Update divider position to be at the left edge of the side panel, accounting for main content padding
+        divider.style.right = (newWidth - 3) + 'px'; // +20 for main content padding, -3 to center the 6px wide divider
+      }
+
+      // Initialize layout on page load
+      function initializeLayout() {
+        const initialWidth = screen.width * 0.25
+        updateLayout(initialWidth);
+      }
+
+      // push warning if the screen is too small
+      if(screen.width < 600)
+      {
+        alert("This website is currently not optimize for phones. Please use a computer. We are working on improving it.")
+      }
+
+      // Call initialization after a short delay to ensure elements are rendered
+      setTimeout(initializeLayout, 100);
+
+      function onMouseMove(e) {
+        if (!isDragging) return;
+        let clientX = (e.touches && e.touches.length) ? e.touches[0].clientX : e.clientX;
+        let newWidth = startWidth + (startX - clientX);
+        console.log('Resizing side panel to:', newWidth);
+
+        newWidth = Math.max(screen.width*0.1, Math.min(screen.width*0.5, newWidth));
+        updateLayout(newWidth);
+        e.preventDefault(); // Prevent unwanted selection
+      }
+      function onMouseUp() {
+        if (isDragging) {
+          isDragging = false;
+          document.body.style.cursor = '';
+          document.body.style.userSelect = '';
+          window.removeEventListener('mousemove', onMouseMove);
+          window.removeEventListener('mouseup', onMouseUp);
+          window.removeEventListener('mouseleave', onMouseUp);
+          window.removeEventListener('touchmove', onMouseMove);
+          window.removeEventListener('touchend', onMouseUp);
+        }
+      }
+      divider.addEventListener('mousedown', function (e) {
+        isDragging = true;
+        startX = e.clientX;
+        startWidth = sidePanel.offsetWidth;
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+        window.addEventListener('mouseleave', onMouseUp);
+      });
+      // Touch support
+      divider.addEventListener('touchstart', function (e) {
+        isDragging = true;
+        startX = e.touches[0].clientX;
+        startWidth = sidePanel.offsetWidth;
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        window.addEventListener('touchmove', onMouseMove, { passive: false });
+        window.addEventListener('touchend', onMouseUp);
+      });
+    })();
+
+      // Toggle select all / none for card checkboxes
+      function toggleSelectAll() {
+        const checkboxes = Array.from(document.querySelectorAll('.card-checkbox'));
+        if (checkboxes.length === 0) return;
+        const anyUnchecked = checkboxes.some(cb => !cb.checked);
+        checkboxes.forEach(cb => { cb.checked = anyUnchecked; });
+        // If an updateSelectedCardsBox function exists (older code), call it to refresh sidebar
+        if (typeof updateSelectedCardsBox === 'function') updateSelectedCardsBox();
+      }
+
+      // Download selected cards (checked) to Word (.doc), grouped by phase and column.
+      function downloadSelectedToWord() {
+        const checked = Array.from(document.querySelectorAll('.card-checkbox:checked'));
+        let entries = [];
+
+        function findCardInData(title) {
+          for (const [cellId, arr] of Object.entries(cardData)) {
+            for (const obj of arr) {
+              if (obj.title === title) return { cellId, obj };
+            }
+          }
+          return null;
+        }
+
+        if (checked.length > 0) {
+          checked.forEach(cb => {
+            const card = cb.closest('.card');
+            const titleEl = card ? card.querySelector('.card-title') : null;
+            const title = titleEl ? titleEl.textContent.trim() : 'Untitled';
+            const found = findCardInData(title);
+            const content = (found && found.obj && found.obj.content) ? found.obj.content : (card ? Array.from(card.querySelectorAll('.short-content-text')).map(n => n.textContent) : []);
+            const cellId = found ? found.cellId : null;
+            entries.push({ title, content, cellId });
+          });
+        } else {
+          const sideTitle = document.getElementById('side-panel-title').textContent.trim();
+          if (sideTitle) {
+            const found = findCardInData(sideTitle);
+            const content = (found && found.obj && found.obj.content) ? found.obj.content : [document.getElementById('side-panel-content').innerText];
+            entries.push({ title: sideTitle, content, cellId: found ? found.cellId : null });
+          }
+        }
+
+        if (entries.length === 0) {
+          alert('No content to download. Select cards to be downloaded');
+          return;
+        }
+
+        // Group entries by cellId
+        const groups = {};
+        entries.forEach(e => {
+          const key = e.cellId || 'other-unknown';
+          if (!groups[key]) groups[key] = [];
+          groups[key].push(e);
+        });
+
+        const columnOrder = ['robot', 'human', 'public'];
+        const phases = ['before', 'during', 'after'];
+
+        function prettyPhase(p) { return p.charAt(0).toUpperCase() + p.slice(1); }
+        function prettyColumn(c) {
+          const lc = c.toLowerCase();
+          if (lc.includes('robot')) return 'Robot';
+          if (lc.includes('human')) return 'Human';
+          if (lc.includes('public')) return 'Public';
+          return c.charAt(0).toUpperCase() + c.slice(1);
+        }
+
+        let html = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Your Personalized Checklist</title></head><body>';
+        html += '<h1>Checklist</h1>';
+        const outputted = new Set();
+
+        phases.forEach(phase => {
+          columnOrder.forEach(col => {
+            const cellKey = `${phase}-${col}`;
+            if (groups[cellKey]) {
+              html += `<h2>&lt;${prettyPhase(phase)}, ${prettyColumn(col)}&gt;</h2>`;
+              groups[cellKey].forEach(item => {
+                html += `<h3>${escapeHtml(item.title)}</h3>`;
+                if (Array.isArray(item.content)) {
+                  html += item.content.map(it => `<p>☐ ${escapeHtml(it)}</p>`).join('');
+                } else {
+                  html += `<p>☐ ${escapeHtml(String(item.content))}</p>`;
+                }
+              });
+              outputted.add(cellKey);
+            }
+          });
+        });
+
+        html += '</body></html>';
+
+        const blob = new Blob([html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'selected_cards.doc';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1500);
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+  </script>
+  
+    <!-- Floating action buttons -->
+    <div style="position:fixed;left:3%;bottom:3%;display:flex;gap:12px;z-index:2001;">
+      <button class="action-btn select-all-btn" onclick="toggleSelectAll()">Select All</button>
+      <button class="action-btn download-word-btn" onclick="downloadSelectedToWord()">Download Selected to Word</button>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,390 @@
+{
+    "before-robot":[
+        {
+            "title": "Site and Robot Selection",
+            "content": [
+                "Evaluate which robot to use in the specific site",
+                "Pick a suitable site for the robot you have"
+            ]
+        },
+        {
+            "title": "Robot Programming",
+            "content": [
+                "Equip and test the robot for obstacle detection",
+                "Test Emergency shut-down procedure",
+                "Plan for potential collisions despite obstacle detection",
+                "Implement protocols for the robot to maintain a safe distance",
+                "Consider mobility aids, such as wheelchairs or canes"
+            ]
+        },
+        {
+            "title": "Site Visit",
+            "content": [
+                "Visit site at similar time to expected deployment",
+                "Explore how the robot will move in the space",
+                "Identify potentially challenging areas for locomotion or sensing (tactile paving, gutters, staircases)",
+                "Try out wifi connection/setup in multiple locations",
+                "Locate power sources for charging during the day"
+            ]
+        },
+        {
+            "title": "Setup Robot Infrastructure",
+            "content": [
+                "Plan the additional sensors and physical modification needed for robot deployment",
+                "Setup the charging infrastructure",
+                "Develop and deploy the modifications."
+            ]
+        },
+        {
+            "title": "Safe Robot Transportation to Site",
+            "content": [
+                "Identify the best route/method to transport robot to site",
+                "Protect sensitive equipment",
+                "Document disassembly and re-assembly process",
+                "Have a place to store the robot (night/day)"
+            ]
+        },
+        {
+            "title": "A Priori Information/Resources for Robot",
+            "content": [
+                "Acquire or plan to build maps",
+                "Build necessary dictionaries etc. for semantic information",
+                "Ensure code for data storage",
+                "Develop or check remote monitoring software",
+                "Try to have an alternative device"
+            ]
+        },
+        {
+            "title": "Robot Pre-Testing",
+            "content": [
+                "Test the robot features (e.g.tracking, recognition, safety features) in the lab beforehand",
+                "Test the robot in simulation or a mock-up of the site if possible."
+            ]
+        },
+        {
+            "title": "Accessibility of Robot Features",
+            "content": [
+                "Select colors (for projections, displays) with color vision deficiency in mind",
+                "Ensure volume adjustment and subtitling for videos are available when possible"
+            ]
+        },
+        {
+            "title": "Site Pre-Testing",
+            "content": [
+                "Run pre-tests with the robot on-site, including with people",
+                "Identify locations where post-interaction interviews/surveys can be conducted",
+                "Verify you are collecting the right data"
+            ]
+        }
+    ],
+    "during-robot":[
+        {
+            "title": "Robot Support",
+            "content": [
+                "Plan robot handler schedule and responsibilities",
+                "Determine whether someone needs to stay close to monitor robot",
+                "Implement systems to inform maintainers/users when errors occur",
+                "Work closely with people from the robotics company if possible"
+            ]
+        },
+        {
+            "title": "Resetting Experiment",
+            "content": [
+                "Reset code/conditions/props, record when they were reset",
+                "Restart robot monitoring software if needed",
+                "Restart robot(s) if needed"
+            ]
+        },
+        {
+            "title": "Documentation",
+            "content": [
+                "Document any changes to the robot",
+                "Document any changes to necessary a priori information/environment and resulting robot procedure",
+                "Detailed documentation of robot failures is very useful"
+            ]
+        },
+        {
+            "title": "Robot Maintenance",
+            "content": [
+                "Check the battery health of the robot",
+                "Check if all systems continue to function correctly",
+                "Check emergency stop"
+            ]
+        },
+        {
+            "title": "Robot Reassessment",
+            "content": [
+                "Check logs for any unexpected behavior or adverse events",
+                "Decide if the robot behavior should change or if the study stopped for any safety or research purposes"
+            ]
+        }
+    ],
+    "after-robot":[
+        {
+            "title": "Robot Transportation Back Home",
+            "content": [
+                "Arrange for safe return/transportation of the robot",
+                "Document the condition of the robot"
+            ]
+        },
+        {
+            "title": "Scene Teardown",
+            "content": [
+                "Remove additional equipment (chargers,sensors, markers) added to the environment to support the robot",
+                "Return all equipment",
+                "Transfer data from  robot onboard cameras or memory",
+                "Erase sensitive data from robot memory after transfer (e.g., building maps)"
+            ]
+        }
+    ],
+    "before-human":[
+        {
+            "title": "Ethics: Consent and Compensation",
+            "content": [
+                "Assess and address potential ethical risks, especially regarding non-consenting individuals (e.g., children)",
+                "Develop a strategy for people to contact research team",
+                "Develop a procedure to delete data on request",
+                "Consider compensating study participants by distributing freebies",
+                "Obtain ethics approval to do a study in public"
+            ]
+        },
+        {
+            "title": "Researcher Support",
+            "content": [
+                "Consider challenges of fieldwork",
+                "Prepare for mixed reactions and emotions"
+            ]
+        },
+        {
+            "title": "Data Protection",
+            "content": [
+                "Confirm compliance with local and national data protection regulations (e.g. GDPR in Europe)",
+                "Develop strategies to inform passers-by of their right to request deletion of recorded data",
+                "Ensure that the length the data is stored aligns with ethics and local regulations",
+                "Consider consulting with lawyers (safety, data, lawsuits)"
+            ]
+        },
+        {
+            "title": "Data Storage",
+            "content": [
+                "Estimate how much data you might collect and select a feasible storage solution",
+                "Decide how you will back up your data (cloud, harddisks)",
+                "Find ways to label data in a way that will be easy to retrieve and synchronize"
+            ]
+        },
+        {
+            "title": "Team Training",
+            "content": [
+                "Provide training for your team on:",
+                    "Safety (e.g., emergency stop)",
+                    "Robot functions (understand and control)",
+                    "Operate recording equipment in busy, crowded and distractive settings",
+                    "Train and pilot data collection methods and public communications"
+            ]
+        },
+        {
+            "title": "Preparation of Study Materials",
+            "content": [
+                "Prepare observation protocols",
+                "Design interview questions",
+                "Design participant questionnaires"
+            ]
+        },
+        {
+            "title": "Study Procedure",
+            "content": [
+                "Formulate a study plan",
+                "Plan the length of your deployment to capture diverse interactions in dynamic public settings",
+                "Plan experimental conditions to be robust enough to work in public"
+            ]
+        },
+        {
+            "title": "Data Collection Equipment",
+            "content": [
+                "Select equipment suitable for documenting your public deployment",
+                "Test your equipment and data collection plan in the site",
+                "Have a plan to synchronize the data (format, recording rate) from different sources (cameras, microphones), race conditions/version control"
+            ]
+        }
+    ],
+    "during-human":[
+        {
+            "title": "Participant Support",
+            "content": [
+                "Prepare ways for participants to contact researchers",
+                "Prepare for frequently asked questions"
+            ]
+        },
+        {
+            "title": "Researcher Support",
+            "content": [
+                "have an open communication with (in-) formal team members",
+                "have regular debriefing meetings"
+            ]
+        },
+        {
+            "title": "Data Protection Strategies",
+            "content": [
+                "Evaluate if  signage is sufficient and serving its purpose"
+            ]
+        },
+        {
+            "title": "Ensure Availability of Study Materials",
+            "content": [
+                "Print sufficient copies of consent forms and information sheets for large amounts of people in public",
+                "Keep materials available at hand in an organized manner"
+            ]
+        },
+        {
+            "title": "Documentation of the Deployment",
+            "content": [
+                "Document adjustments to your study plan",
+                "Take photos for paper/archival reasons"
+            ]
+        },
+        {
+            "title": "Verify Data Recording",
+            "content": [
+                "Make sure data is stored continuously and correctly",
+                "Ensure data recording (non-robot) is verified (i.e., external cameras)",
+                "Have procedures on when/how to check the data"
+            ]
+        },
+        {
+            "title": "Research Support",
+            "content": [
+                "Re-evaluate if the location/method for interviews is suitable",
+                "Execute/use personalized checklist"
+            ]
+        }
+    ],
+    "after-human":[
+        {
+            "title": "Worker Compensation",
+            "content": [
+                "Compensate helpers (both study/robot handlers)",
+                "Compensate interviewees (if applicable)"
+            ]
+        },
+        {
+            "title": "Data Processing",
+            "content": [
+                "Label and organize your data in ways that you can easily retrieve later",
+                "Verify that you can map participant IDs to recordings",
+                "Anonymize data",
+                "Clean, pre-process, and release open access dataset"
+            ]
+        },
+        {
+            "title": "Data Storage",
+            "content": [
+                "Transfer data into long term archive  to avoid running out of storage space on cameras/robot",
+                "Ensure that the length the data is stored aligns with ethics approval and local regulations",
+                "Create logs of your obtained data to maintain an overview of what data you collected"
+            ]
+        },
+        {
+            "title": "Document Initial Observations",
+            "content": [
+                "Write down notes summarizing interesting observations"
+            ]
+        },
+        {
+            "title": "Returning Equipment",
+            "content": [
+                "Remove all study equipment and signage"
+            ]
+        }
+    ],
+    "before-public":[
+        {
+            "title": "Seek Approval for Deployment from Site Authorities",
+            "content": [
+                "Check local laws regarding data collection in public, particularly regarding video and audio recordings",
+                "Identify authorities at the deployment site and get their approval",
+                "Get permission from building/area owners for the deployment and study"
+            ]
+        },
+        {
+            "title": "Secure Access to Local Infrastructure",
+            "content": [
+                "Secure access to a reliable internet connection for the robot",
+                "Secure access to charging sockets and storage area"
+            ]
+        },
+        {
+            "title": "Plan Accessibility",
+            "content": [
+                "Make note of accessible routes and plan not to obstruct them (e.g., emergency exits)"
+            ]
+        },
+        {
+            "title": "Inform the Public about the Deployment",
+            "content": [
+                "Consider if you need a cover story",
+                "Consider advertising the deployment beforehand in local outlets (newspapers, billboards)",
+                "Consider informing about the ongoing deployment by placing visible signs in the area or on the robot",
+                "Develop a strategy for passersby to receive results of the study"
+            ]
+        }
+    ],
+    "during-public":[
+        {
+            "title": "Maintain Contact with Authorities",
+            "content": [
+                "Present intermediate results iteratively to interested authorities"
+            ]
+        },
+        {
+            "title": "Risk Management",
+            "content": [
+                "Maintain an ongoing dialogue with non-team staff (e.g., shop owners) present at the deployment site (e.g. info desk in the building)",
+                "Provide contact information to relevant stakeholders (e.g. building managers, emergency responders)"
+            ]
+        },
+        {
+            "title": "Secure Accessibility and Safety",
+            "content": [
+                "Check if emergency exits and elevators are not blocked"
+            ]
+        },
+        {
+            "title": "Inform the Public",
+            "content": [
+                "Have a researcher on site who can answer questions and explain the deployment",
+                "Provide written information in visible and accessible locations",
+                "Put up an info box where study participants can leave their email address if they want to know about the results",
+                "Evaluate if additional outreach events are necessary"
+            ]
+        }
+    ],
+    "after-public":[
+        {
+            "title": "Engage with Local Authorities",
+            "content": [
+                "Write thank you notes/emails and seek support of future collaboration with local authorities",
+                "Send results if desired"
+            ]
+        },
+        {
+            "title": "Engage Local Infrastructure Providers",
+            "content": [
+                "Pay any costs (e.g. building use fees)",
+                "Inform about the completion of the deployment",
+                "Send results if desired"
+            ]
+        },
+        {
+            "title": "Site Cleanup",
+            "content": [
+                "Remove any posters or other materials from the deployment site"
+            ]
+        },
+        {
+            "title": "Inform the Public about the Results",
+            "content":[
+                "Report back to the community (e.g. through news articles, popular science events)"
+            ]
+        }
+    ]
+}

@@ -59,7 +59,7 @@
     let cardData = {};
     async function loadCardDataAndInit() {
       try {
-        const res = await fetch('card_20250929_1120_USA_ET.json');
+        const res = await fetch('latest_cards.json');
         cardData = await res.json();
         // Initialize all cells with cards
         Object.keys(cardData).forEach(cellId => {

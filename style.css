@@ -1,7 +1,6 @@
-/* Hide the checkbox label when the card is flipped */
-.card.flipped .card-checkbox-label {
-    display: none !important;
-}
+/* Hide the front checkbox when card is flipped, show the back checkbox */
+.card.flipped .card-checkbox-label { display: none !important; }
+.card.flipped .card-checkbox-label-back { display: inline-block !important; }
 * {
     margin: 0;
     padding: 0;
@@ -125,6 +124,11 @@ body {
 .card-checkbox-label {
     display: inline-block;
     line-height: 0; /* avoid extra vertical gap */
+}
+
+.card-checkbox-label-back {
+    display: none;
+    line-height: 0;
 }
 
 /* Larger checkboxes for expanded cards as well */
@@ -306,3 +310,14 @@ body {
 
 .select-all-btn { background: #4CAF50; box-shadow: 0 4px 12px rgba(76,175,80,0.22); }
 .select-all-btn:hover { background: #3ea34a; }
+
+/* When in unselect mode show red button */
+.select-all-btn.unselect-mode { background: #f44336; box-shadow: 0 4px 12px rgba(244,67,54,0.22); }
+.select-all-btn.unselect-mode:hover { background: #da190b; }
+
+#side-panel-description {
+    font-size: large;
+    margin-top: 10px;
+    display:none;
+    border-top:1px solid #eee;color:#444;
+}

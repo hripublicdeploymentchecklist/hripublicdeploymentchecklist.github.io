@@ -9,6 +9,25 @@
 </head>
 
 <body>
+  <div id="welcome-modal" class="welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-modal-title">
+    <div class="welcome-modal-content">
+      <h2 id="welcome-modal-title">Welcome to the HRI Public Deployment Checklist!</h2>
+      <p id="welcome-modal-text">
+        We created this tool to help researchers identify potential blind spots in their deployment and make the deployment smoother. We hope it covers all aspects of the deployment, from the robot's technical details to research procedures, and to public and site interaction.
+        <br>
+        <br>
+        You can read more about the creation process in our preprint paper <a href="https://arxiv.org/abs/2602.19038" target="_blank" rel="noopener noreferrer">here</a>.
+        <br>
+        <br>
+        Claire Liang<br>
+        Franziska Babel<br>
+        Hannah Pelikan<br>
+        Sydney Thompson<br>
+        Xiang Zhi Tan<br>
+      </p>
+      <button id="welcome-modal-close" class="welcome-modal-close" type="button">Close</button>
+    </div>
+  </div>
   <div id="main-side-wrapper" style="display:flex;flex-direction:row;height:100vh;width:100vw;">
     <div class="container" id="main-content" style="flex:1 1 auto;min-width:0;margin-right:420px;">
       <h1 style="text-align: center; margin: 20px 0; font-size: 2.5em; color: #333; font-weight: bold;">HRI Public
@@ -83,6 +102,21 @@
     }
     // Run on page load
     window.addEventListener('DOMContentLoaded', loadCardDataAndInit);
+
+    // Show welcome modal when the page loads and let user close it to continue.
+    window.addEventListener('DOMContentLoaded', function () {
+      const welcomeModal = document.getElementById('welcome-modal');
+      const closeButton = document.getElementById('welcome-modal-close');
+      if (!welcomeModal || !closeButton) return;
+
+      welcomeModal.classList.add('is-open');
+      document.body.classList.add('modal-open');
+
+      closeButton.addEventListener('click', function () {
+        welcomeModal.classList.remove('is-open');
+        document.body.classList.remove('modal-open');
+      });
+    });
 
     // Create cards for each cell
     function createCard(data, index) {
@@ -196,7 +230,7 @@
 
       // push warning if the screen is too small
       if (screen.width < 600) {
-        alert("This website is currently not optimize for phones. Please use a computer. We are working on improving it.")
+        alert("This website is currently not optimized for phones. Please use a computer. We are working on improving it.")
       }
 
       // Call initialization after a short delay to ensure elements are rendered
